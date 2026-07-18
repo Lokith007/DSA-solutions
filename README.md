@@ -1,2 +1,2 @@
-# leetcode-solutions
-LeetCode solutions — auto-synced by LeetGeek
+# DSA-solutions
+DSA solutions — auto-synced by LeetGeek
