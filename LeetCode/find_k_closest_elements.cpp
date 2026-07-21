@@ -4,10 +4,18 @@
 class Solution {
 public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-        int left=0,right=size(arr)-1;
-        while(right-left>=k){
-            (abs(arr[left]-x)>abs(arr[right]-x))?left++:right--;
+        if (arr.size() == 1) {
+            return {arr[0]};
         }
-        return vector<int>(arr.begin()+left,arr.begin()+right+1);
+        int l=0,r=size(arr)-1;
+        while(r-l+1>k){
+            if(abs(arr[l]-x)>abs(arr[r]-x)){
+                l++;
+            }else{
+                r--;
+            }
+        }
+        return vector<int>(arr.begin()+l,arr.begin()+r+1);
+        //return ans;
     }
 };
