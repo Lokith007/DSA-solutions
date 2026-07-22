@@ -1,0 +1,36 @@
+// Merge k Sorted Lists [Hard]
+// https://leetcode.com/problems/merge-k-sorted-lists/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<pair<int,ListNode*>, vector<pair<int, ListNode*>> , greater<pair<int,ListNode*>>> pq;
+        for(int i=0;i<size(lists);i++){
+            if(lists[i]){
+                pq.push({lists[i]->val , lists[i]});
+            }
+        }
+        ListNode* dummy=new ListNode(-1);
+        ListNode* temp=dummy;
+        while(!pq.empty()){
+            auto ch=pq.top();
+            if(ch.second->next){
+                pq.push({ch.second->next->val,ch.second->next});
+            }
+            pq.pop();
+            temp->next=ch.second;
+            temp=temp->next;
+        }
+       return dummy->next; 
+    }
+};
