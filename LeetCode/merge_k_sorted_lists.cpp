@@ -14,23 +14,24 @@
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        priority_queue<pair<int,ListNode*>, vector<pair<int, ListNode*>> , greater<pair<int,ListNode*>>> pq;
+        priority_queue<pair<int,ListNode*>,vector<pair<int,ListNode*>>,greater<pair<int,ListNode*>>>pq;
         for(int i=0;i<size(lists);i++){
-            if(lists[i]){
-                pq.push({lists[i]->val , lists[i]});
+            if(lists[i]!=NULL){
+                pq.push({lists[i]->val,lists[i]});
             }
         }
-        ListNode* dummy=new ListNode(-1);
-        ListNode* temp=dummy;
+        ListNode* tail=new ListNode(0);
+        ListNode* dummy=tail;
         while(!pq.empty()){
-            auto ch=pq.top();
-            if(ch.second->next){
-                pq.push({ch.second->next->val,ch.second->next});
-            }
+            //cout<<pq.size();
+            ListNode* smallest=pq.top().second;
             pq.pop();
-            temp->next=ch.second;
-            temp=temp->next;
+            if(smallest->next!=NULL){
+                pq.push({smallest->next->val,smallest->next});
+            }
+            tail->next=smallest;
+            tail=tail->next;
         }
-       return dummy->next; 
+        return dummy->next;
     }
 };
