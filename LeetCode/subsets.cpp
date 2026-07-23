@@ -3,20 +3,19 @@
 
 class Solution {
 public:
-    void solve(vector<int>& nums,int index,int n,vector<int>& temp,vector<vector<int>>& ans){
-        if(index>=n){
-            ans.push_back(temp);
-            return;
-        }
-        solve(nums,index+1,n,temp,ans);
-        temp.push_back(nums[index]);
-        solve(nums,index+1,n,temp,ans);
-        temp.pop_back();
-    }
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<int>temp;
+        int n=size(nums);
         vector<vector<int>>ans;
-        solve(nums,0,size(nums),temp,ans);
+        int count=1<<n;
+        for(int i=0;i<count;i++){
+            vector<int>temp;
+            for(int j=0;j<size(nums);j++){
+                if(i&(1<<j)){
+                    temp.push_back(nums[j]);
+                }
+            }
+            ans.push_back(temp);
+        }
         return ans;
     }
 };
