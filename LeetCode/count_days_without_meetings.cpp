@@ -4,18 +4,18 @@
 class Solution {
 public:
     int countDays(int days, vector<vector<int>>& meetings) {
-        int current_day=0;
+        int curr_day=0;
         sort(meetings.begin(),meetings.end());
-        for(const auto& m:meetings){
+        for(auto &m:meetings){
             int i=m[0],j=m[1];
-            if(j<=current_day){
+            if(j<=curr_day){
                 continue;
-            }else if(i>current_day){
+            }else if(i>curr_day){
                 days-=j-i+1;
             }else{
-                days-=j-current_day;
+                days-=j-curr_day;
             }
-            current_day=j;
+            curr_day=j;
         }
         return days;
     }
